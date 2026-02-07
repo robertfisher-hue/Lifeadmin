@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Admin</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#84a996">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" id="app">
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen active">
+            <h1>Life Admin</h1>
+            <div class="menu-grid">
+                <button class="menu-btn" onclick="showScreen('morning-checkin')">
+                    <span class="btn-icon">☀️</span>
+                    <span class="btn-text">Morning Check-in</span>
+                </button>
+                <button class="menu-btn" onclick="showScreen('evening-checkin')">
+                    <span class="btn-icon">🌙</span>
+                    <span class="btn-text">Evening Check-in</span>
+                </button>
+                <button class="menu-btn" onclick="showScreen('dresden-checklist')">
+                    <span class="btn-icon">🏠</span>
+                    <span class="btn-text">Dresden</span>
+                </button>
+                <button class="menu-btn" onclick="showScreen('berlin-checklist')">
+                    <span class="btn-icon">🏢</span>
+                    <span class="btn-text">Berlin</span>
+                </button>
+                <button class="menu-btn secondary" onclick="showScreen('history')">
+                    <span class="btn-icon">📊</span>
+                    <span class="btn-text">Auswertung</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Morning Check-in -->
+        <div id="morning-checkin" class="screen">
+            <button class="back-btn" onclick="showScreen('main-menu')">← Zurück</button>
+            <div class="checkin-header">
+                <h2>Guten Morgen</h2>
+                <p class="date-display" id="morning-date"></p>
+            </div>
+            <form id="morning-form" class="checkin-form">
+                <div class="form-group">
+                    <label>Worauf freust du dich heute besonders?</label>
+                    <textarea id="morning-q1" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Was willst du heute erreichen?</label>
+                    <textarea id="morning-q2" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Was willst du heute vermeiden?</label>
+                    <textarea id="morning-q3" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label id="morning-rotating-label"></label>
+                    <textarea id="morning-q4" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Speichern</button>
+            </form>
+        </div>
+
+        <!-- Evening Check-in -->
+        <div id="evening-checkin" class="screen">
+            <button class="back-btn" onclick="showScreen('main-menu')">← Zurück</button>
+            <div class="checkin-header">
+                <h2>Gute Nacht</h2>
+                <p class="date-display" id="evening-date"></p>
+            </div>
+            <form id="evening-form" class="checkin-form">
+                <div class="form-group">
+                    <label>Wie zufrieden bist du heute mit deiner Ernährung gewesen?</label>
+                    <div class="slider-container">
+                        <input type="range" id="evening-q1" min="1" max="5" value="3" class="slider">
+                        <div class="slider-labels">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                        <div class="slider-value" id="evening-q1-value">3</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Hattest du heute geplant Krafttraining zu machen?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="training-planned" value="yes" onchange="toggleTrainingQuestion()">
+                            <span>Ja</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="training-planned" value="no" onchange="toggleTrainingQuestion()" checked>
+                            <span>Nein</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="training-done-group" style="display: none;">
+                    <label>Hast du heute Krafttraining gemacht?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="training-done" value="yes">
+                            <span>Ja</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="training-done" value="no">
+                            <span>Nein</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Hattest du heute Kontrolle über deine Aufmerksamkeit?</label>
+                    <div class="slider-container">
+                        <input type="range" id="evening-q4" min="1" max="5" value="3" class="slider">
+                        <div class="slider-labels">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                        <div class="slider-value" id="evening-q4-value">3</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Hattest du heute einen guten Umgang mit Ängsten?</label>
+                    <div class="slider-container">
+                        <input type="range" id="evening-q5" min="1" max="5" value="3" class="slider">
+                        <div class="slider-labels">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                        <div class="slider-value" id="evening-q5-value">3</div>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Speichern</button>
+            </form>
+        </div>
+
+        <!-- Dresden Checklist -->
+        <div id="dresden-checklist" class="screen">
+            <button class="back-btn" onclick="showScreen('main-menu')">← Zurück</button>
+            <div class="checklist-header">
+                <h2>Dresden</h2>
+                <button class="reset-btn" onclick="resetChecklist('dresden')">Zurücksetzen</button>
+            </div>
+            <div class="checklist" id="dresden-list"></div>
+        </div>
+
+        <!-- Berlin Checklist -->
+        <div id="berlin-checklist" class="screen">
+            <button class="back-btn" onclick="showScreen('main-menu')">← Zurück</button>
+            <div class="checklist-header">
+                <h2>Berlin</h2>
+                <button class="reset-btn" onclick="resetChecklist('berlin')">Zurücksetzen</button>
+            </div>
+            <div class="checklist" id="berlin-list"></div>
+        </div>
+
+        <!-- History/Analytics -->
+        <div id="history" class="screen">
+            <button class="back-btn" onclick="showScreen('main-menu')">← Zurück</button>
+            <h2>Auswertung</h2>
+            <div class="history-tabs">
+                <button class="tab-btn active" onclick="showHistoryTab('morning')">Morgen</button>
+                <button class="tab-btn" onclick="showHistoryTab('evening')">Abend</button>
+            </div>
+            <div id="history-content"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

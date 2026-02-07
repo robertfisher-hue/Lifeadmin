@@ -1,11 +1,461 @@
-/* CSS Styling */
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
 }
+
+:root {
+    --bg-primary: #84a996;
+    --bg-secondary: #6d8f7e;
+    --bg-light: #9bbdaa;
+    --text-primary: #ffffff;
+    --text-secondary: #f0f0f0;
+    --accent: #000000;
+    --shadow: rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Screens */
+.screen {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typography */
 h1 {
-    color: #333;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    letter-spacing: -0.02em;
 }
-/* Additional styling can be added here */
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+}
+
+/* Main Menu */
+.menu-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.menu-btn {
+    background: var(--bg-secondary);
+    border: none;
+    padding: 25px;
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.menu-btn:hover {
+    background: var(--bg-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.menu-btn:active {
+    transform: translateY(0);
+}
+
+.menu-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-icon {
+    font-size: 1.8rem;
+}
+
+.btn-text {
+    flex: 1;
+    text-align: left;
+}
+
+/* Back Button */
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.back-btn:hover {
+    opacity: 1;
+}
+
+/* Check-in Forms */
+.checkin-header {
+    margin-bottom: 30px;
+}
+
+.date-display {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    font-weight: 300;
+}
+
+.checkin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+textarea {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    transition: all 0.2s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Slider */
+.slider-container {
+    position: relative;
+    padding: 15px 0;
+}
+
+.slider {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    outline: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--text-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: transform 0.2s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: var(--text-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    font-family: 'Space Mono', monospace;
+}
+
+.slider-value {
+    position: absolute;
+    top: -5px;
+    right: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+}
+
+/* Radio Buttons */
+.radio-group {
+    display: flex;
+    gap: 15px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.radio-label:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.radio-label input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--text-primary);
+}
+
+/* Submit Button */
+.submit-btn {
+    background: var(--accent);
+    color: var(--text-primary);
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Checklists */
+.checklist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.reset-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.reset-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.checklist-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.checklist-item.checked {
+    background: rgba(255, 255, 255, 0.25);
+    opacity: 0.7;
+}
+
+.checklist-item input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: var(--text-primary);
+}
+
+.checklist-item label {
+    flex: 1;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.checklist-item.checked label {
+    text-decoration: line-through;
+}
+
+/* History */
+.history-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.tab-btn.active {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.history-entry {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.history-entry-date {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-family: 'Space Mono', monospace;
+}
+
+.history-entry-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.history-entry-item {
+    padding-left: 15px;
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.history-entry-question {
+    font-weight: 500;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.history-entry-answer {
+    font-size: 1rem;
+}
+
+.chart-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.chart-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.no-data {
+    text-align: center;
+    padding: 40px;
+    opacity: 0.6;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.6rem;
+    }
+    
+    .menu-btn {
+        padding: 20px;
+    }
+}
